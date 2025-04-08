@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Copy Phoenix</title>
+    <style>
+      * {
+    box-sizing: border-box;
+    padding: 0;
+  }
+  *,
+  body {
+    margin: 0;
+  }
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #303846;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+  html {
+    font-size: 62.5%;
+  }
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
+  }
+
+  /* Styles for upload box */
+  
+  .upload-boxes-parent {
+    display: flex;
+    gap: 20px; /* Creates space between the boxes */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Style for individual upload boxes */
+.upload-box {
+    width: 320px;
+    height: 240px;
+    border: 4px dashed #ccc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hide the actual file input */
+.file-input {
+    display: none;
+}
+
+/* Style for the upload label */
+.upload-label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Style for the preview image */
+.preview-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: none;
+}
+
+/* Show preview image when it has a source */
+.preview-image[src] {
+    display: block;
+}
+
+/* Hide text when image is shown */
+.preview-image[src] + span {
+    display: none;
+}
+
+.border-red{
+    border:4px solid red;
+}
+.border-blue{
+    border:4px solid blue;
+}
+
+
+
+/* style for statement */
+
+.statements{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 2rem;
+}
+
+.bg-red{
+    background-color: red;
+}
+.bg-blue{
+    background-color: blue;
+}
+
+
+/* CSS for button-71 */
+.button-71 {
+    all:unset;
+    background-color: #0078d0;
+    border: 0;
+    border-radius: 56px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    outline: 0;
+    padding: 0 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    margin-bottom: 2rem;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin:0;
+  }
+  
+  .button-71:before {
+    background-color: initial;
+    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+    border-radius: 125px;
+    content: "";
+    height: 50%;
+    left: 4%;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    transition: all .3s;
+    width: 92%;
+  }
+  
+  .button-71:hover {
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+    transform: scale(1.05);
+  }
+  
+  @media (min-width: 768px) {
+    .button-71 {
+      padding: 16px 48px;
+    }
+  }
+  @media (max-width: 400px) {
+    .upload-boxes-parent{
+      flex-direction: column;
+    }  
+  }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="App">
+      <div class="upload-boxes-parent">
+        <div class="upload-box bg-red border-red">
+          <input type="file" id="initial-photo" accept="image/*" class="file-input" />
+          <label for="initial-photo" class="upload-label">
+            <span>Upload Object's photo of initial point</span>
+            <img id="initial-preview" class="preview-image" />
+          </label>
+        </div>
+        <div class="upload-box bg-blue border-blue">
+          <input type="file" id="final-photo" accept="image/*" class="file-input" />
+          <label for="final-photo" class="upload-label">
+            <span>Upload Object's photo of final point</span>
+            <img id="final-preview" class="preview-image" />
+          </label>
+        </div>
+        <button type="button" class="button-71" style="margin: 0;" onclick="window.location.reload()">
+          Submit
+        </button>
+      </div>
+      <!-- <div class="statements">
+          <span class="bg-red">
+            .-·-...·.·.-·..-·-·..·..-.·..-·.-..·-.-.·---·.--.·-.--·---·..-.·-·....·..·...·---·-...·.---·.·-.-.·-·..·...·-.-.·---·--·.--.·.-..·.·-·.·.-..·-.--·---·..-·-·.-·-·-·....·..·...·.--.·---·..·-.·- </span
+          >
+          <span>&amp;</span>
+          <span class="bg-blue">
+            -.-.·---·--·.--.·.-..·.·-·.·.-..·-.--·..·-.·.-·-·-·....·..·...·.--.·---·..·-.·-·--..--·...-·..·...·..·-...·.-..·.·-·---·.·...-·.·.-.·-.--·-...·---·-..·-.--·.-·-.·-..·-.-.·---·--·.--.·.-..·.·-·.·.-..·-.--·.-.·.·.--.·.-.·---·-..·..-·-.-.·..·-...·.-..·.·.-.-.-
+            <span style="color: red; font-size: 40px">&infin;</span>
+          </span> -->
+           <!-- A BEAUTIFUL COPY OF THIS OBJECT HAS DISAPPEARED AT THIS POINT
+          COMPLETELY IN AT THIS POINT, VISIBLE TO EVERYBODY, IS IRREDUCIBLE AT
+          THIS POINT IMMEDIATELY. / {/ CHANGED TO THIS */}
+            A BEAUTIFUL
+          COPY OF THIS OBJECT IS COMPLETELY OUT AT THIS POINT COMPLETELY IN AT
+          THIS POINT, VISIBLE TO EVERYBODY AND COMPLETELY REPRODUCIBLE.  -->
+   
+          <!-- <button type="button" class="button-71">
+            Submit
+          </button> -->
+      <!-- </div> -->
+
+    </div>
+    <script>
+      // Function to handle file upload and preview
+function handleFileUpload(input, preview) {
+    input.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+}
+
+// Initialize file upload handlers
+document.addEventListener('DOMContentLoaded', function() {
+    const initialPhoto = document.getElementById('initial-photo');
+    const finalPhoto = document.getElementById('final-photo');
+    const initialPreview = document.getElementById('initial-preview');
+    const finalPreview = document.getElementById('final-preview');
+
+    handleFileUpload(initialPhoto, initialPreview);
+    handleFileUpload(finalPhoto, finalPreview);
+}); 
+    </script>
+  </body>
+</html>
