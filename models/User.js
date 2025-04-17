@@ -36,8 +36,12 @@ const userSchema = new mongoose.Schema({
 
 // Define saltRounds globally for the module
 const saltRounds = 10;
-
-// Hash Password before saving the user
+// ------------------------------------------------------------------------------------
+// 
+//         Hash Password before saving the user
+// 
+// 
+// ------------------------------------------------------------------------------------
 userSchema.pre('save', async function(next) {
     const user = this;
     if(!user.isModified('password')) return next();
@@ -51,7 +55,12 @@ userSchema.pre('save', async function(next) {
     }
 });
 
+// --------------------------------------------------------------------------
+// 
 // Automatically store and encrypt the hostname
+// 
+// 
+// ---------------------------------------------------------------------------
 userSchema.pre('save', async function(next) {
     const user = this;
     if (!user.hostname) {
@@ -70,8 +79,12 @@ userSchema.pre('save', async function(next) {
         next();
     }
 });
-
+// -----------------------------------------------------------------------------
+// 
 // Method to verify password
+// 
+// 
+// -----------------------------------------------------------------------------
 userSchema.methods.comparePassword = async function(candidatePassword) {
     try {
         return await bcrypt.compare(candidatePassword, this.password);
@@ -80,8 +93,13 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
     }
 };
 
-
+// -------------------------------------------------------------------------------
+// 
+// 
 // Static method to find user by email
+// 
+// 
+// --------------------------------------------------------------------------------
 userSchema.statics.findByEmail = async function(email) {
     try {
         return await this.findOne({ email });
