@@ -27,6 +27,9 @@ allowNull: false,
 clickOnSubmit:{
     type:DataTypes.BOOLEAN
 },
+like:{
+    type:DataTypes.BOOLEAN
+},
 
 submittedAt: {
 type: DataTypes.DATE,

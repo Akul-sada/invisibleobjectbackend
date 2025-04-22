@@ -1,43 +1,46 @@
 const jwt = require('jsonwebtoken');
 const User = require("../models/User");
 
-exports.getAllUsers = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined!",
-  });
-};
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "This route is not yet defined!",
-  });
-};
+// exports.getAllUsers = (req, res) => {
+//   res.status(500).json({
+//     status: "error",
+//     message: "This route is not yet defined!",
+//   });
+// };
+// exports.getUser = (req, res) => {
+//   res.status(500).json({
+//     status: "error",
+//     message: "This route is not yet defined!",
+//   });
+// };
 exports.createUser = async (req, res) => {
   try {
     // Add hostname to database
     const clientIp = req.ip;
 
-    // Take input from user
-    const { name, email, password } = req.body;
+
 
     // Create a new user and store automatically
-    const newUser = await User.create({ name:req.body.name, email:req.body.email, password:req.body.password, clientIp });
+    const newUser = await User.create({ id,name:req.body.name, email:req.body.email, password:req.body.password, clientIp });
 
     // ----------------------------------------------------------------
-                // JWT Signing
+                // JWT Signing and storing toke to cookies
 
     // -------------------------------------------------------------------
 
-    const jwt = jwt.sign
+    const token = jwt.sign({id:newUser.id},process.env.JWT_SECRET,process.env.JWT_EXPIRES);
 
     res
       .status(201)
       .json({
-        message: `User ${name} registered successfully!`,
-        user: { id: newUser.id, name: newUser.name, email: newUser.email },
+        status:'success',
+        token,
+        data:{
+          user:newUser
+        }
       });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       status: "error",
       message: "This route is not yet defined!",
@@ -56,3 +59,13 @@ exports.deleteUser = (req, res) => {
     message: "This route is not yet defined!",
   });
 };
+
+
+
+exports.getHelloWorld =(req,res)=>{
+  res.status(200).json({
+    status:"success",
+    message:"Hello World"
+  });
+
+}
