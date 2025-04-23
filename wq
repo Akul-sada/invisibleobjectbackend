@@ -1,0 +1,19 @@
+add auth controller signup route and utils folder
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch postgresql
+# Changes to be committed:
+#	modified:   app.js
+#	new file:   controllers/authController.js
+#	modified:   controllers/userController.js
+#	modified:   database.js
+#	modified:   models/User.js
+#	modified:   package-lock.json
+#	modified:   package.json
+#	modified:   routes/userRoutes.js
+#	modified:   server.js
+#	new file:   utils/appError.js
+#	new file:   utils/catchAsync.js
+#	new file:   utils/email.js
+#
