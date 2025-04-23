@@ -1,8 +1,12 @@
 const dotenv = require('dotenv');
-const app = require('./app');
 const { connection } = require('./database');
 dotenv.config({path: './config.env'});
-const port = process.env.PORT || 5432;
+const app = require('./app');
+
+const port = process.env.PORT || 3000;
+
+
+
 
 
 app.listen(port,()=>{

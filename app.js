@@ -1,10 +1,16 @@
 const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
+const userRouter = require('./routes/userRoutes');
+// const sessionRoutes = require('./routes/sessionRoutes');
 
 
 
 const app = express();
+app.use(express.json());
+
+
+app.use('/api/v1/users',userRouter);
+app.use('signup',userRouter);
 
 // Define pug
 
