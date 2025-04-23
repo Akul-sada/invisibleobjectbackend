@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const userRouter = require('./routes/userRoutes');
+
 // const sessionRoutes = require('./routes/sessionRoutes');
 
 
@@ -10,7 +11,11 @@ app.use(express.json());
 
 
 app.use('/api/v1/users',userRouter);
-app.use('signup',userRouter);
+
+
+app.all('*', (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  });
 
 // Define pug
 
