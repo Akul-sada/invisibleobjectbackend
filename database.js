@@ -21,19 +21,6 @@ const sequelize = new Sequelize({
   clientMinMessages: 'notice',
 });
 
-// const client =new Client({
-//     host:"localhost",
-//     user:"postgres",
-//     port:5432,
-//     database: `${database}`,
-//     database: `${database}`,
-// });
-// // client.connect();
-
-// module.exports = client;
-
-
-
 
 const connection = async () => {
   try {
