@@ -1,36 +1,63 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { timeStamp } = require('console');
 
 const userSchema = new mongoose.Schema({
-  name: {
+  guestId:{
     type: String,
-    required: true,
+    default: null
+  },
+  
+  name: {
+    type: String
+  },
+  userId: {
+    type: String,
+    unique: true,
+    default: () => new mongoose.Types.ObjectId().toString()
+  },
+  countryCode:{
+    type:String
+  },
+  mobileNumber:{
+    type:String
   },
   email: {
     type: String,
-    required: true,
-    unique: true,
+    unique: true
   },
-  password: {
+  userName:{
     type: String,
-    required: true,
-    minlength: [6, 'Password must be at least 6 characters long'],
-    validate: {
-      validator: function(value) {
-        // Additional password validation rules
-        return value.length >= 6;
-      },
-      message: 'Password must be at least 6 characters long'
-    }
+    unique: true
   },
   role: {
     type: String,
-    enum: ['user', 'admin'],
+    enum: ['user', 'admin','guest'],
     default: 'user'
   },
   hostname: {
     type: String,
     required: true,
+  },
+  verifiedMobileNumber:{
+    type: Boolean,
+    default: false
+  },
+  verifiedEmail:{
+    type: Boolean,
+    default: false
+  },
+  isSignedUp:{
+    type:Boolean,
+    default:false,
+  },
+  isSubscribed:{
+    type:Boolean,
+    default:false,
+    timeStamp:{
+      type: Date,
+      default: Date.now
+    }
   }
 });
 
@@ -100,7 +127,7 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 // 
 // 
 // --------------------------------------------------------------------------------
-userSchema.statics.findByEmail = async function(email) {
+userSchema.methods.findByEmail = async function(email) {
     try {
         return await this.findOne({ email });
     } catch(err) {
